@@ -11,16 +11,16 @@ argv[2] = http
 
 */
 
-int main(int argc, char** argv[]){
+int main(int argc, char** argv){
     struct addrinfo hints;
     struct addrinfo * res;
 
     memset((void *) &hints, 0, sizeof(addrinfo));
 
-    hints.ai_family = AF_INET;
+    hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
 
-    int rc = getaddrinfo(*argv[1], *argv[2],  &hints, &res);
+    int rc = getaddrinfo(argv[1], argv[2],  &hints, &res);
 
     if (rc != 0){
         std::cerr << "[getaddrinfo]: " << gai_strerror(rc) << std::endl;
