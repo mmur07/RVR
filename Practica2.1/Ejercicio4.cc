@@ -67,7 +67,7 @@ int main(int argc, char** argv){
     while (!finished){
         char buffer[80];
 
-        int bytesRec = recv(cliente_sd, (void*)buffer, sizeof(buffer), 0); //Bytes recieved from client
+        int bytesRec = recv(cliente_sd, (void*)buffer, sizeof(buffer), 0); //Recieving mssg from client
         if (bytesRec <= 0){
             std::cout << "CONEXIÓN TERMINADA\n";
             finished = true;
@@ -75,7 +75,7 @@ int main(int argc, char** argv){
         else{
             buffer[bytesRec] = '\0';
 
-            int bytesSent = send(cliente_sd, buffer, bytesRec, 0); //Bytes sent from server
+            int bytesSent = send(cliente_sd, buffer, bytesRec, 0); //Sending mssg to client
         }
     }
     close(sd);

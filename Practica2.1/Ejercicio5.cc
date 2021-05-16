@@ -40,23 +40,26 @@ int main(int argc, char** argv){
         return -1;
     }
 
+    freeaddrinfo(res);
+
     bool finished = false;
     while (!finished){
         std::cin >> buff;
-        if (buff[0] == 'Q') finished = true;
-        else{
-            int bytesSent = send(sd, buff, sizeof(buff), 0); //Bytes sent to server
+        if (buff[0] == 'Q' && buff[1] == '\0') finished = true;
 
-            if (bytesSent <= 0){
-                std::cout << "Error at sending message\n";
-                return -1;
-            }
+        int bytesSent = send(sd, buff, sizeof(buff), 0); //Sending mssg to server
 
-            int bytesRec = recv(sd, buff, sizeof(buff), 0); //Bytes recieved from server
-            buff[bytesRec] = '\0';
-            std::cout << buff << std::endl;
+        if (bytesSent <= 0){
+            std::cout << "Error at sending message\n";
+            return -1;
         }
+
+        int bytesRec = recv(sd, buff, sizeof(buff), 0); //Recieving mssg from server
+        buff[bytesRec] = '\0';
+        std::cout << buff << std::endl;
     }
+
+    close(sd);
 
     std::cout << "Ending connection\n";
     return 0;
