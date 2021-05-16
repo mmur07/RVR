@@ -48,7 +48,7 @@ int main(int argc, char** argv){
         int bytes = recvfrom(sd, buffer, 80, 0, &cliente, &clienteLenght); //Mensaje del cliente en buffer.
         
         if (bytes == -1){
-            std::cout << "Error al recibir información del cliente.";
+            std::cout << "Error al recibir información del cliente.\n";
             return -1;
         }
         
@@ -73,7 +73,11 @@ int main(int argc, char** argv){
 
             case ('q'):
             finished = true;
-            std::cout << "Fin del programa.";
+            std::cout << "Fin del programa.\n";
+            break;
+
+            default:
+            std::cout << "Comando no detectado.\n";
             break;
         }
     }
