@@ -44,6 +44,8 @@ public:
 
     int from_bin(char * bobj);
 
+    void get_info();
+
     uint8_t type;
 
     std::string nick;
